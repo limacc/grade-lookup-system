@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성적 조회 시스템</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .grade-display {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .admin-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .admin-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .admin-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .status-indicator {
+            text-align: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-expired {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 성적 조회 시스템</h1>
+            <p>학번과 성명을 입력하여 성적을 조회하세요</p>
+        </div>
+        
+        <div id="statusIndicator" class="status-indicator" style="display: none;"></div>
+        
+        <form id="gradeForm">
+            <div class="form-group">
+                <label for="studentId">학번</label>
+                <input type="text" id="studentId" name="studentId" placeholder="9자리 학번을 입력하세요" maxlength="9" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="name">성명</label>
+                <input type="text" id="name" name="name" placeholder="성명을 입력하세요" required>
+            </div>
+            
+            <button type="submit" class="btn" id="submitBtn">성적 조회</button>
+        </form>
+        
+        <div id="result" class="result" style="display: none;"></div>
+        
+        <div class="admin-link">
+            <a href="/admin">관리자 페이지</a>
+        </div>
+    </div>
+
+    <script>
+        // 시스템 상태 확인
+        async function checkStatus() {
+            try {
+                const response = await fetch('/api/status');
+                const status = await response.json();
+                
+                const indicator = document.getElementById('statusIndicator');
+                indicator.style.display = 'block';
+                
+                if (status.is_expired) {
+                    indicator.className = 'status-indicator status-expired';
+                    indicator.textContent = '⚠️ 조회 기간이 종료되었습니다';
+                    document.getElementById('submitBtn').disabled = true;
+                } else if (status.expiry_date) {
+                    indicator.className = 'status-indicator status-active';
+                    indicator.textContent = `✅ 조회 가능 (만료일: ${status.expiry_date})`;
+                } else {
+                    indicator.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('상태 확인 실패:', error);
+            }
+        }
+        
+        // 페이지 로드 시 상태 확인
+        checkStatus();
+        
+        // 폼 제출 처리
+        document.getElementById('gradeForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const studentId = document.getElementById('studentId').value.trim();
+            const name = document.getElementById('name').value.trim();
+            const submitBtn = document.getElementById('submitBtn');
+            const result = document.getElementById('result');
+            
+            if (!studentId || !name) {
+                showResult('학번과 성명을 모두 입력해주세요.', 'error');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = '조회 중...';
+            
+            try {
+                const response = await fetch('/api/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        student_id: studentId,
+                        name: name
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult(`
+                        <div>
+                            <p><strong>학번:</strong> ${data.data.student_id}</p>
+                            <p><strong>성명:</strong> ${data.data.name}</p>
+                            <div class="grade-display">${data.data.grade}</div>
+                        </div>
+                    `, 'success');
+                } else {
+                    showResult(data.message, 'error');
+                }
+                
+            } catch (error) {
+                showResult('서버 연결에 실패했습니다.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = '성적 조회';
+            }
+        });
+        
+        function showResult(message, type) {
+            const result = document.getElementById('result');
+            result.innerHTML = message;
+            result.className = `result ${type}`;
+            result.style.display = 'block';
+        }
+        
+        // 학번 입력 시 숫자만 허용
+        document.getElementById('studentId').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
+    </script>
+</body>
+</html>

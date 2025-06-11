@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지 - 성적 조회 시스템</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="datetime-local"]:focus {
+            outline: none;
+            border-color: #ff7e5f;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            margin-top: 1rem;
+        }
+        
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        
+        .result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .status-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .status-card h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-value {
+            font-weight: bold;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .back-link a {
+            color: #ff7e5f;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .help-text {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 관리자 페이지</h1>
+            <p>조회 만료일을 설정하고 시스템 상태를 관리하세요</p>
+        </div>
+        
+        <div class="status-card">
+            <h3>📊 시스템 상태</h3>
+            <div class="status-item">
+                <span>현재 만료일:</span>
+                <span class="status-value" id="currentExpiry">-</span>
+            </div>
+            <div class="status-item">
+                <span>조회 가능 여부:</span>
+                <span class="status-value" id="accessStatus">-</span>
+            </div>
+            <div class="status-item">
+                <span>등록된 학생 수:</span>
+                <span class="status-value" id="studentCount">-</span>
+            </div>
+        </div>
+        
+        <form id="expiryForm">
+            <div class="form-group">
+                <label for="expiryDate">조회 만료일 설정</label>
+                <input type="datetime-local" id="expiryDate" name="expiryDate" required>
+                <div class="help-text">
+                    이 날짜 이후에는 학생들이 성적을 조회할 수 없습니다.
+                </div>
+            </div>
+            
+            <button type="submit" class="btn" id="submitBtn">만료일 설정</button>
+        </form>
+        
+        <button type="button" class="btn btn-secondary" onclick="refreshStatus()">상태 새로고침</button>
+        
+        <div id="result" class="result" style="display: none;"></div>
+        
+        <div class="back-link">
+            <a href="/">← 성적 조회 페이지로 돌아가기</a>
+        </div>
+    </div>
+
+    <script>
+        // 시스템 상태 로드
+        async function loadStatus() {
+            try {
+                const response = await fetch('/api/status');
+                const status = await response.json();
+                
+                document.getElementById('currentExpiry').textContent = 
+                    status.expiry_date || '설정되지 않음';
+                
+                document.getElementById('accessStatus').textContent = 
+                    status.is_expired ? '❌ 만료됨' : '✅ 활성';
+                
+                document.getElementById('studentCount').textContent = 
+                    status.grades_count + '명';
+                
+                // 현재 만료일을 폼에 설정
+                if (status.expiry_date) {
+                    const date = new Date(status.expiry_date);
+                    const localDateTime = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+                        .toISOString().slice(0, 16);
+                    document.getElementById('expiryDate').value = localDateTime;
+                }
+                
+            } catch (error) {
+                console.error('상태 로드 실패:', error);
+                showResult('상태 정보를 불러올 수 없습니다.', 'error');
+            }
+        }
+        
+        // 페이지 로드 시 상태 로드
+        loadStatus();
+        
+        // 상태 새로고침
+        function refreshStatus() {
+            loadStatus();
+            showResult('상태가 새로고침되었습니다.', 'success');
+        }
+        
+        // 폼 제출 처리
+        document.getElementById('expiryForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const expiryDate = document.getElementById('expiryDate').value;
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (!expiryDate) {
+                showResult('만료일을 선택해주세요.', 'error');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = '설정 중...';
+            
+            try {
+                // datetime-local 값을 YYYY-MM-DD HH:MM 형식으로 변환
+                const formattedDate = expiryDate.replace('T', ' ');
+                
+                const response = await fetch('/api/admin/set-expiry', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        expiry_date: formattedDate
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showResult(data.message, 'success');
+                    loadStatus(); // 상태 새로고침
+                } else {
+                    showResult(data.message, 'error');
+                }
+                
+            } catch (error) {
+                showResult('서버 연결에 실패했습니다.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = '만료일 설정';
+            }
+        });
+        
+        function showResult(message, type) {
+            const result = document.getElementById('result');
+            result.textContent = message;
+            result.className = `result ${type}`;
+            result.style.display = 'block';
+            
+            // 3초 후 메시지 숨기기
+            setTimeout(() => {
+                result.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
