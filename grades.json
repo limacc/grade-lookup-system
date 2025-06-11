@@ -1,0 +1,512 @@
+[
+  {
+    "student_id": "202211940",
+    "name": "조서영",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202210100",
+    "name": "박서영",
+    "grade": "A"
+  },
+  {
+    "student_id": "202310396",
+    "name": "최지형",
+    "grade": "A"
+  },
+  {
+    "student_id": "202211386",
+    "name": "홍지애",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202311255",
+    "name": "제민영",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202311719",
+    "name": "석찬우",
+    "grade": "B+"
+  },
+  {
+    "student_id": "202311738",
+    "name": "양도형",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202311747",
+    "name": "염수현",
+    "grade": "A"
+  },
+  {
+    "student_id": "202311804",
+    "name": "이아영",
+    "grade": "F"
+  },
+  {
+    "student_id": "202311840",
+    "name": "전서연",
+    "grade": "B+"
+  },
+  {
+    "student_id": "202311850",
+    "name": "정현정",
+    "grade": "A"
+  },
+  {
+    "student_id": "202311874",
+    "name": "최서영",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202313010",
+    "name": "이소은",
+    "grade": "B+"
+  },
+  {
+    "student_id": "202211809",
+    "name": "박지윤",
+    "grade": "A"
+  },
+  {
+    "student_id": "202211860",
+    "name": "유경림",
+    "grade": "B+"
+  },
+  {
+    "student_id": "202211880",
+    "name": "이선휘",
+    "grade": "A"
+  },
+  {
+    "student_id": "202211921",
+    "name": "장영빈",
+    "grade": "A"
+  },
+  {
+    "student_id": "202211978",
+    "name": "한재이",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111574",
+    "name": "지선우",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111749",
+    "name": "강범수",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111775",
+    "name": "김나윤",
+    "grade": "A"
+  },
+  {
+    "student_id": "202111781",
+    "name": "김동언",
+    "grade": "A"
+  },
+  {
+    "student_id": "202111783",
+    "name": "김민서",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111787",
+    "name": "김보문",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111813",
+    "name": "김준혁",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111814",
+    "name": "김지섭",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111864",
+    "name": "박준희",
+    "grade": "A"
+  },
+  {
+    "student_id": "202111887",
+    "name": "신민식",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111901",
+    "name": "양재석",
+    "grade": "A"
+  },
+  {
+    "student_id": "202210054",
+    "name": "이정민",
+    "grade": "A"
+  },
+  {
+    "student_id": "202110177",
+    "name": "박예진",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202212887",
+    "name": "조하빈",
+    "grade": "A"
+  },
+  {
+    "student_id": "202211168",
+    "name": "김윤서",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111153",
+    "name": "고지은",
+    "grade": "A"
+  },
+  {
+    "student_id": "202111178",
+    "name": "김서현",
+    "grade": "A"
+  },
+  {
+    "student_id": "202111194",
+    "name": "김정인",
+    "grade": "A"
+  },
+  {
+    "student_id": "202211760",
+    "name": "김주은",
+    "grade": "A"
+  },
+  {
+    "student_id": "202211871",
+    "name": "이나경",
+    "grade": "A"
+  },
+  {
+    "student_id": "202211890",
+    "name": "이유정",
+    "grade": "A"
+  },
+  {
+    "student_id": "202211959",
+    "name": "최민소",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202212949",
+    "name": "백수현",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202212951",
+    "name": "한태희",
+    "grade": "A"
+  },
+  {
+    "student_id": "202212953",
+    "name": "이혜지",
+    "grade": "A"
+  },
+  {
+    "student_id": "202212954",
+    "name": "이준명",
+    "grade": "A"
+  },
+  {
+    "student_id": "202111126",
+    "name": "조신욱",
+    "grade": "B+"
+  },
+  {
+    "student_id": "202014584",
+    "name": "김준하",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202014614",
+    "name": "신현아",
+    "grade": "A"
+  },
+  {
+    "student_id": "202014659",
+    "name": "주예지",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202014361",
+    "name": "이승준",
+    "grade": "A"
+  },
+  {
+    "student_id": "202014362",
+    "name": "이승현",
+    "grade": "A"
+  },
+  {
+    "student_id": "202311875",
+    "name": "최연호",
+    "grade": "A"
+  },
+  {
+    "student_id": "202110923",
+    "name": "윤성민",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202310267",
+    "name": "김채린",
+    "grade": "A"
+  },
+  {
+    "student_id": "202310305",
+    "name": "서혜영",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202310977",
+    "name": "임예은",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202311591",
+    "name": "강희지",
+    "grade": "F"
+  },
+  {
+    "student_id": "202311621",
+    "name": "김병헌",
+    "grade": "B+"
+  },
+  {
+    "student_id": "202311657",
+    "name": "김지영",
+    "grade": "A"
+  },
+  {
+    "student_id": "202311659",
+    "name": "김지율",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202311698",
+    "name": "박지운",
+    "grade": "A"
+  },
+  {
+    "student_id": "202311761",
+    "name": "윤소민",
+    "grade": "A"
+  },
+  {
+    "student_id": "202311791",
+    "name": "이서진",
+    "grade": "A"
+  },
+  {
+    "student_id": "202311805",
+    "name": "이연우",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202311819",
+    "name": "이태희",
+    "grade": "A"
+  },
+  {
+    "student_id": "202311857",
+    "name": "조현아",
+    "grade": "B+"
+  },
+  {
+    "student_id": "202313008",
+    "name": "김규희",
+    "grade": "A"
+  },
+  {
+    "student_id": "202313009",
+    "name": "강민규",
+    "grade": "A"
+  },
+  {
+    "student_id": "202313011",
+    "name": "김나원",
+    "grade": "A"
+  },
+  {
+    "student_id": "202313012",
+    "name": "주하림",
+    "grade": "A"
+  },
+  {
+    "student_id": "202210370",
+    "name": "이현주",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202211710",
+    "name": "강재환",
+    "grade": "A"
+  },
+  {
+    "student_id": "202211713",
+    "name": "강해나",
+    "grade": "A"
+  },
+  {
+    "student_id": "202211724",
+    "name": "기주영",
+    "grade": "B+"
+  },
+  {
+    "student_id": "202211828",
+    "name": "손다은",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202211846",
+    "name": "신하은",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202110145",
+    "name": "전민기",
+    "grade": "A"
+  },
+  {
+    "student_id": "202111094",
+    "name": "이민기",
+    "grade": "A"
+  },
+  {
+    "student_id": "202111334",
+    "name": "이정호",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111753",
+    "name": "고병호",
+    "grade": "A"
+  },
+  {
+    "student_id": "202111822",
+    "name": "김현창",
+    "grade": "A"
+  },
+  {
+    "student_id": "202111829",
+    "name": "노현영",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111885",
+    "name": "신동훈",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111886",
+    "name": "신명준",
+    "grade": "B+"
+  },
+  {
+    "student_id": "202111898",
+    "name": "양성현",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111990",
+    "name": "임준성",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111998",
+    "name": "장정진",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202112002",
+    "name": "전종혁",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202112034",
+    "name": "최승민",
+    "grade": "A"
+  },
+  {
+    "student_id": "202112038",
+    "name": "최정호",
+    "grade": "A"
+  },
+  {
+    "student_id": "202014575",
+    "name": "김동현",
+    "grade": "B+"
+  },
+  {
+    "student_id": "202014657",
+    "name": "조찬영",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202340015",
+    "name": "김소이",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202112947",
+    "name": "박민아",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111161",
+    "name": "권지연",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202211726",
+    "name": "김건준",
+    "grade": "A"
+  },
+  {
+    "student_id": "202212952",
+    "name": "한승희",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202111999",
+    "name": "장지원",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202112047",
+    "name": "한진희",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202113072",
+    "name": "이창현",
+    "grade": "A"
+  },
+  {
+    "student_id": "202014048",
+    "name": "임동의",
+    "grade": "A+"
+  },
+  {
+    "student_id": "202014418",
+    "name": "최영림",
+    "grade": "A"
+  },
+  {
+    "student_id": "202014819",
+    "name": "박용준",
+    "grade": "A"
+  }
+]
